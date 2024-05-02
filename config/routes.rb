@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       delete '/destroy/:id', to: 'recipes#destroy'
     end
   end
+  
   root 'homepage#index'
   get '/*path' => 'homepage#index'
 

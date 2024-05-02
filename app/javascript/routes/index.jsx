@@ -8,7 +8,7 @@ import Recipe from "../components/Recipe";
 export default (
   <Router>
     <Routes>
-      <Route path="/" exact component={Home} />
+      <Route path="/" exact element={<Home />} />
       <Route path="/recipes" element={<Recipes />} />
       <Route path="/recipe/:id" element={<Recipe />} />
       {/* <Route path="/recipe" element={<NewRecipe />} /> */}
