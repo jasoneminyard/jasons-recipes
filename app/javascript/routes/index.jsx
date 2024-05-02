@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "../components/Home";
 import Recipes from "../components/Recipes";
 import Recipe from "../components/Recipe";
-{/* import NewRecipe from "../components/NewRecipe"; */}
+import NewRecipe from "../components/NewRecipe";
 
 export default (
   <Router>
@@ -11,7 +11,7 @@ export default (
       <Route path="/" exact element={<Home />} />
       <Route path="/recipes" element={<Recipes />} />
       <Route path="/recipe/:id" element={<Recipe />} />
-      {/* <Route path="/recipe" element={<NewRecipe />} /> */}
+      <Route path="/recipe" element={<NewRecipe />} />
     </Routes>
   </Router>
 );
