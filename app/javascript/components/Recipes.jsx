@@ -6,7 +6,7 @@ const Recipes = () => {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    const url = "/api/v1/recipes/index";
+    const url = "/api/v1/recipes";
     fetch(url)
       .then((res) => {
         if (res.ok) {
