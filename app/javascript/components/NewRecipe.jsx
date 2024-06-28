@@ -46,7 +46,7 @@ const NewRecipe = () => {
         }
         throw new Error("Network response was not ok.");
       })
-      .then((response) => navigate(`/recipe/${response.id}`))
+      .then((response) => navigate(`/recipes/${response.id}`))
       .catch((error) => console.log(error.message));
   };
 

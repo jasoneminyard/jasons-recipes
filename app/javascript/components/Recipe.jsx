@@ -7,7 +7,7 @@ const Recipe = () => {
     const [recipe, setRecipe] = useState({ ingredients: "" });
 
     useEffect(() => {
-        const url = `/api/v1/show/${params.id}`;
+        const url = `/api/v1/recipes/${params.id}`;
         fetch(url)
           .then((response) => {
             if (response.ok) {
@@ -24,7 +24,7 @@ const Recipe = () => {
       };
 
       const deleteRecipe = () => {
-        const url = `/api/v1/destroy/${params.id}`;
+        const url = `/api/v1/recipes/${params.id}`;
         const token = document.querySelector('meta[name="csrf-token"]').content;
     
         fetch(url, {
