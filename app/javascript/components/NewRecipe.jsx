@@ -20,7 +20,7 @@ const NewRecipe = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    const url = "/api/v1/recipes/create";
+    const url = "/api/v1/recipes";
 
     if (name.length == 0 || ingredients.length == 0 || instruction.length == 0)
       return;
@@ -46,7 +46,7 @@ const NewRecipe = () => {
         }
         throw new Error("Network response was not ok.");
       })
-      .then((response) => navigate(`/recipe/${response.id}`))
+      .then((response) => navigate(`/recipes/${response.id}`))
       .catch((error) => console.log(error.message));
   };
 

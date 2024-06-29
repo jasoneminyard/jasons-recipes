@@ -10,7 +10,7 @@ export default (
     <Routes>
       <Route path="/" exact element={<Home />} />
       <Route path="/recipes" element={<Recipes />} />
-      <Route path="/recipe/:id" element={<Recipe />} />
+      <Route path="/recipes/:id" element={<Recipe />} />
       <Route path="/recipe" element={<NewRecipe />} />
     </Routes>
   </Router>
