@@ -1,0 +1,5 @@
+one:
+  id: 1
+  name: "Recipe One"
+  ingredients: "salt, pepper"
+  instruction: "mix ingredients"

@@ -46,6 +46,7 @@ gem "bootsnap", require: false
 
 gem "bootstrap-sass"
 
+gem 'sass', '~> 3.7', '>= 3.7.4'
 
 gem "sass-rails"
 
