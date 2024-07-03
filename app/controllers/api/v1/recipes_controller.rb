@@ -15,6 +15,14 @@ class Api::V1::RecipesController < ApplicationController
     end
   end
 
+  # def edit
+  #   if @recipe
+  #     render json: @recipe
+  #   else
+  #     render json: { message: 'Edit failed to find recipe!' }
+  #   end
+  # end
+
   def show
     render json: @recipe
   end

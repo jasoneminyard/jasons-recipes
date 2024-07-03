@@ -26,8 +26,9 @@
   ],
   "devDependencies": {
     "@types/bootstrap": "^5.2.10",
+    "eslint": "^8.0.0",
+    "eslint-config-react-app": "^7.0.1",
     "postcss": "^8.4.38",
     "postcss-cli": "^11.0.0"
   }
 }
-

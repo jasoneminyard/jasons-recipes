@@ -22,7 +22,7 @@ const NewRecipe = () => {
     event.preventDefault();
     const url = "/api/v1/recipes";
 
-    if (name.length == 0 || ingredients.length == 0 || instruction.length == 0)
+    if (name.length === 0 || ingredients.length === 0 || instruction.length === 0)
       return;
 
     const body = {
