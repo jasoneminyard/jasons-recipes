@@ -17,7 +17,7 @@ const Recipe = () => {
           })
           .then((response) => setRecipe(response))
           .catch(() => navigate("/recipes"));
-      }, [params.id]);
+      }, [navigate, params.id]);
 
       const addHtmlEntities = (str) => {
         return String(str).replace(/&lt;/g, "<").replace(/&gt;/g, ">");
@@ -67,7 +67,7 @@ const Recipe = () => {
           <div className="hero position-relative d-flex align-items-center justify-content-center">
             <img
               src={recipe.image}
-              alt={`${recipe.name} image`}
+              alt={`${recipe.name}`}
               className="img-fluid position-absolute"
             />
             <div className="overlay bg-dark position-absolute" />
