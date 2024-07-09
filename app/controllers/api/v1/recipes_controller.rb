@@ -1,5 +1,5 @@
 class Api::V1::RecipesController < ApplicationController
-  before_action :set_recipe, only: %i[show destroy]
+  before_action :set_recipe, only: %i[show destroy update]
   
   def index
     recipe = Recipe.all.order(created_at: :desc)
@@ -30,6 +30,15 @@ class Api::V1::RecipesController < ApplicationController
   def destroy
     @recipe&.destroy
     render json: { message: 'Recipe deleted!' }
+  end
+
+  def update
+    recipe = @recipe.update(recipe_params)
+    if recipe
+      render json: recipe
+    else
+      render json: recipe.errors
+    end
   end
 
     private

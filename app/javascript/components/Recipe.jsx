@@ -92,6 +92,11 @@ const Recipe = () => {
             />
           </div>
           <div className="col-sm-12 col-lg-2">
+          <div className="text-end mb-3">
+            <Link to={`/recipes/${recipe.id}/edit`} className="btn custom-button">
+              Edit Recipe
+            </Link>
+          </div>
             <button
               type="button"
               className="btn btn-danger"
