@@ -22,10 +22,6 @@ const EditRecipe = () => {
       .catch(() => navigate("/recipes"));
   }, [navigate, params.id]);
 
-  const [name, setName] = useState(recipe.name);
-  const [ingredients, setIngredients] = useState(recipe.ingredients);
-  const [instruction, setInstruction] = useState(recipe.instruction);
-
   const stripHtmlEntities = (str) => {
     return String(str)
       .replace(/\n/g, "<br> <br>")
@@ -33,10 +29,21 @@ const EditRecipe = () => {
       .replace(/>/g, "&gt;");
   };
 
-  const onChange = (event, setFunction) => {
-    setFunction(event.target.value);
+//   const onChange = (event, setFunction) => {
+//     setFunction(event.target.value);
+//   };
+
+  const updateRecipe = (key, value) => {
+    setRecipe((previousRecipe) => ({ ...previousRecipe, [key]: value }));
   };
 
+  const handleInputChange = (e) => {
+    const { target } = e;
+    const { name } = target;
+    const value = target.value;
+
+    updateRecipe(name, value);
+  };
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -88,7 +95,7 @@ const EditRecipe = () => {
                 className="form-control"
                 required
                 value={recipe.name}
-                onChange={(event) => onChange(event, setName)}
+                onChange={handleInputChange}
               />
             </div>
             <div className="form-group">
@@ -100,7 +107,7 @@ const EditRecipe = () => {
                 className="form-control"
                 required
                 value={recipe.ingredients}
-                onChange={(event) => onChange(event, setIngredients)}
+                onChange={handleInputChange}
               />
               <small id="ingredientsHelp" className="form-text text-muted">
                 Separate each ingredient with a comma.
@@ -114,7 +121,8 @@ const EditRecipe = () => {
               rows="5"
               required
               value={recipe.instruction}
-              onChange={(event) => onChange(event, setInstruction)}
+            //   onChange={(event) => onChange(event, setInstruction)}
+              onChange={handleInputChange}
             />
             <button type="submit" className="btn custom-button mt-3">
               Update Recipe
