@@ -1,11 +1,30 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const EditRecipe = () => {
+  const params = useParams();
   const navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [ingredients, setIngredients] = useState("");
-  const [instruction, setInstruction] = useState("");
+  const [recipe, setRecipe] = useState({ name:"", ingredients: "", instruction: "" });
+
+
+  useEffect(() => {
+    const url = `/api/v1/recipes/${params.id}/edit`;
+    fetch(url)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Network response from edit was not ok.");
+      })
+      .then((response) => 
+        setRecipe(response)
+    )
+      .catch(() => navigate("/recipes"));
+  }, [navigate, params.id]);
+
+  const [name, setName] = useState(recipe.name);
+  const [ingredients, setIngredients] = useState(recipe.ingredients);
+  const [instruction, setInstruction] = useState(recipe.instruction);
 
   const stripHtmlEntities = (str) => {
     return String(str)
@@ -17,6 +36,7 @@ const EditRecipe = () => {
   const onChange = (event, setFunction) => {
     setFunction(event.target.value);
   };
+
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -32,6 +52,7 @@ const EditRecipe = () => {
     };
 
     const token = document.querySelector('meta[name="csrf-token"]').content;
+
     fetch(url, {
       method: "PUT",
       headers: {
@@ -55,7 +76,7 @@ const EditRecipe = () => {
       <div className="row">
         <div className="col-sm-12 col-lg-6 offset-lg-3">
           <h1 className="font-weight-normal mb-5">
-            Add a new recipe to our awesome recipe collection.
+            Edit this recipe.
           </h1>
           <form onSubmit={onSubmit}>
             <div className="form-group">
@@ -66,6 +87,7 @@ const EditRecipe = () => {
                 id="recipeName"
                 className="form-control"
                 required
+                value={recipe.name}
                 onChange={(event) => onChange(event, setName)}
               />
             </div>
@@ -77,6 +99,7 @@ const EditRecipe = () => {
                 id="recipeIngredients"
                 className="form-control"
                 required
+                value={recipe.ingredients}
                 onChange={(event) => onChange(event, setIngredients)}
               />
               <small id="ingredientsHelp" className="form-text text-muted">
@@ -90,6 +113,7 @@ const EditRecipe = () => {
               name="instruction"
               rows="5"
               required
+              value={recipe.instruction}
               onChange={(event) => onChange(event, setInstruction)}
             />
             <button type="submit" className="btn custom-button mt-3">
