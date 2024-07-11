@@ -1,11 +1,30 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-const NewRecipe = () => {
+const EditRecipe = () => {
+  const params = useParams();
   const navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [ingredients, setIngredients] = useState("");
-  const [instruction, setInstruction] = useState("");
+  const [recipe, setRecipe] = useState({ name:"", ingredients: "", instruction: "" });
+
+
+  useEffect(() => {
+    const url = `/api/v1/recipes/${params.id}/edit`;
+    fetch(url)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Network response from edit was not ok.");
+      })
+      .then((response) => 
+        setRecipe(response)
+    )
+      .catch(() => navigate("/recipes"));
+  }, [navigate, params.id]);
+
+  const [name, setName] = useState(recipe.name);
+  const [ingredients, setIngredients] = useState(recipe.ingredients);
+  const [instruction, setInstruction] = useState(recipe.instruction);
 
   const stripHtmlEntities = (str) => {
     return String(str)
@@ -14,17 +33,31 @@ const NewRecipe = () => {
       .replace(/>/g, "&gt;");
   };
 
-  const onChange = (event, setFunction) => {
-    setFunction(event.target.value);
+  const updateRecipe = (key, value) => {
+    setRecipe((previousRecipe) => ({ ...previousRecipe, [key]: value }));
+  };
+
+  const handleInputChange = (e) => {
+    const { target } = e;
+    const { name } = target;
+    const value = target.value;
+
+    updateRecipe(name, value);
   };
 
   const onSubmit = (event) => {
+    const id = params.id;
     event.preventDefault();
-    const url = "/api/v1/recipes";
+    const url = `/api/v1/recipes/${id}`;
 
-    if (name.length === 0 || ingredients.length === 0 || instruction.length === 0)
-      return;
+    const name = recipe.name;
+    const ingredients = recipe.ingredients;
+    const instruction = recipe.instruction;
 
+    if (name.length === 0 || ingredients.length === 0 || instruction.length === 0){
+        return
+    }
+    
     const body = {
       name,
       ingredients,
@@ -32,8 +65,9 @@ const NewRecipe = () => {
     };
 
     const token = document.querySelector('meta[name="csrf-token"]').content;
+
     fetch(url, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "X-CSRF-Token": token,
         "Content-Type": "application/json",
@@ -46,7 +80,7 @@ const NewRecipe = () => {
         }
         throw new Error("Network response was not ok.");
       })
-      .then((response) => navigate(`/recipes/${response.id}`))
+      .then((response) => navigate(`/recipes/${params.id}`))
       .catch((error) => console.log(error.message));
   };
 
@@ -55,7 +89,7 @@ const NewRecipe = () => {
       <div className="row">
         <div className="col-sm-12 col-lg-6 offset-lg-3">
           <h1 className="font-weight-normal mb-5">
-            Add a new recipe to our awesome recipe collection.
+            Edit this recipe.
           </h1>
           <form onSubmit={onSubmit}>
             <div className="form-group">
@@ -66,7 +100,8 @@ const NewRecipe = () => {
                 id="recipeName"
                 className="form-control"
                 required
-                onChange={(event) => onChange(event, setName)}
+                value={recipe.name}
+                onChange={handleInputChange}
               />
             </div>
             <div className="form-group">
@@ -77,7 +112,8 @@ const NewRecipe = () => {
                 id="recipeIngredients"
                 className="form-control"
                 required
-                onChange={(event) => onChange(event, setIngredients)}
+                value={recipe.ingredients}
+                onChange={handleInputChange}
               />
               <small id="ingredientsHelp" className="form-text text-muted">
                 Separate each ingredient with a comma.
@@ -90,10 +126,11 @@ const NewRecipe = () => {
               name="instruction"
               rows="5"
               required
-              onChange={(event) => onChange(event, setInstruction)}
+              value={recipe.instruction}
+              onChange={handleInputChange}
             />
             <button type="submit" className="btn custom-button mt-3">
-              Create Recipe
+              Update Recipe
             </button>
             <Link to="/recipes" className="btn btn-link mt-3">
               Back to recipes
@@ -105,4 +142,4 @@ const NewRecipe = () => {
   );
 };
 
-export default NewRecipe;
+export default EditRecipe;

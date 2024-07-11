@@ -1,5 +1,5 @@
 class Api::V1::RecipesController < ApplicationController
-  before_action :set_recipe, only: %i[show destroy]
+  before_action :set_recipe, only: %i[show destroy update edit]
   
   def index
     recipe = Recipe.all.order(created_at: :desc)
@@ -15,6 +15,14 @@ class Api::V1::RecipesController < ApplicationController
     end
   end
 
+  def edit
+    if @recipe
+      render json: @recipe
+    else
+      render json: { message: 'Edit failed to find recipe!' }
+    end
+  end
+
   def show
     render json: @recipe
   end
@@ -24,10 +32,19 @@ class Api::V1::RecipesController < ApplicationController
     render json: { message: 'Recipe deleted!' }
   end
 
+  def update
+    recipe = @recipe.update(recipe_params)
+    if recipe
+      render json: recipe
+    else
+      render json: recipe.errors
+    end
+  end
+
     private
 
       def recipe_params
-        params.permit(:name, :image, :ingredients, :instruction)
+        params.permit(:id, :name, :image, :ingredients, :instruction)
       end
 
       def set_recipe
