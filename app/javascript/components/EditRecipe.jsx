@@ -46,22 +46,18 @@ const EditRecipe = () => {
   };
 
   const onSubmit = (event) => {
-    console.log("onSubmit");
+    const id = params.id;
     event.preventDefault();
-    console.log(`params.id == ${params.id}`)
-    const url = `/api/v1/recipes/${params.id}`;
-    console.log(`name == ${recipe.name}`);
+    const url = `/api/v1/recipes/${id}`;
+
     const name = recipe.name;
     const ingredients = recipe.ingredients;
     const instruction = recipe.instruction;
 
     if (name.length === 0 || ingredients.length === 0 || instruction.length === 0){
-        console.log("returning now")
         return
     }
-    else
-        console.log("length check is good");
-
+    
     const body = {
       name,
       ingredients,
@@ -84,7 +80,7 @@ const EditRecipe = () => {
         }
         throw new Error("Network response was not ok.");
       })
-      .then((response) => navigate(`/recipes/${response.id}`))
+      .then((response) => navigate(`/recipes/${params.id}`))
       .catch((error) => console.log(error.message));
   };
 
