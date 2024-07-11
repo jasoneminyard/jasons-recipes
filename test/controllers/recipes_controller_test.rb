@@ -7,7 +7,7 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
 
   test "should get index" do
     get api_v1_recipes_url
-    assert_response :success
+    assert_response :success # all responses are json and :success
   end
 
   test "should create recipe" do
@@ -20,29 +20,29 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
         }
     end
 
-    assert_response :success
+    assert_response :success # all responses are json and :success
+  end
+
+  test "should get edit" do
+    get edit_api_v1_recipe_url(@recipe)
+    assert_response :success # all responses are json and :success
   end
 
   test "should show recipe" do
     get api_v1_recipe_url(@recipe)
-    assert_response :success
+    assert_response :success # all responses are json and :success
   end
 
-  # test "should get edit" do
-  #   get api_v1_edit_recipe_url(@recipe)
-  #   assert_response :success
-  # end
-
-  # test "should update recipe" do
-  #   patch recipe_url(@recipe), params: { recipe: {  } }
-  #   assert_redirected_to recipe_url(@recipe)
-  # end
+  test "should update recipe" do
+    patch api_v1_recipe_url(@recipe), params: { recipe: { name: "shocker" } }
+    assert_response :success # all responses are json and :success
+  end
 
   test "should destroy recipe" do
     assert_difference("Recipe.count", -1) do
       delete api_v1_recipe_url(@recipe)
     end
 
-    assert_response :success
+    assert_response :success # all responses are json and :success
   end
 end
