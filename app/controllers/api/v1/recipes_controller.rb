@@ -17,8 +17,6 @@ class Api::V1::RecipesController < ApplicationController
 
   def edit
     if @recipe
-      logger = Rails.logger
-      logger.info "success"
       render json: @recipe
     else
       render json: { message: 'Edit failed to find recipe!' }

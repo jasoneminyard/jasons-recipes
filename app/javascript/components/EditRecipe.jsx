@@ -22,16 +22,16 @@ const EditRecipe = () => {
       .catch(() => navigate("/recipes"));
   }, [navigate, params.id]);
 
+  const [name, setName] = useState(recipe.name);
+  const [ingredients, setIngredients] = useState(recipe.ingredients);
+  const [instruction, setInstruction] = useState(recipe.instruction);
+
   const stripHtmlEntities = (str) => {
     return String(str)
       .replace(/\n/g, "<br> <br>")
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;");
   };
-
-//   const onChange = (event, setFunction) => {
-//     setFunction(event.target.value);
-//   };
 
   const updateRecipe = (key, value) => {
     setRecipe((previousRecipe) => ({ ...previousRecipe, [key]: value }));
@@ -46,11 +46,21 @@ const EditRecipe = () => {
   };
 
   const onSubmit = (event) => {
+    console.log("onSubmit");
     event.preventDefault();
-    const url = "/api/v1/recipes";
+    console.log(`params.id == ${params.id}`)
+    const url = `/api/v1/recipes/${params.id}`;
+    console.log(`name == ${recipe.name}`);
+    const name = recipe.name;
+    const ingredients = recipe.ingredients;
+    const instruction = recipe.instruction;
 
-    if (name.length === 0 || ingredients.length === 0 || instruction.length === 0)
-      return;
+    if (name.length === 0 || ingredients.length === 0 || instruction.length === 0){
+        console.log("returning now")
+        return
+    }
+    else
+        console.log("length check is good");
 
     const body = {
       name,
@@ -121,7 +131,6 @@ const EditRecipe = () => {
               rows="5"
               required
               value={recipe.instruction}
-            //   onChange={(event) => onChange(event, setInstruction)}
               onChange={handleInputChange}
             />
             <button type="submit" className="btn custom-button mt-3">
