@@ -96,7 +96,7 @@ const NewRecipe = () => {
               Create Recipe
             </button>
             <Link to="/recipes" className="btn btn-link mt-3">
-              Back to recipes
+              Back To Recipes
             </Link>
           </form>
         </div>

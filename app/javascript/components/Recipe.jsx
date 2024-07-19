@@ -107,7 +107,7 @@ const Recipe = () => {
           </div>
         </div>
         <Link to="/recipes" className="btn btn-link">
-          Back to recipes
+          Back To Recipes
         </Link>
       </div>
     </div>

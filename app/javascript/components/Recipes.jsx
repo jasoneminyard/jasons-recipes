@@ -69,9 +69,6 @@ const Recipes = () => {
           <div className="row">
             {recipes.length > 0 ? allRecipes : noRecipe}
           </div>
-          <Link to="/" className="btn btn-link">
-          Home
-          </Link>
         </main>
       </div>
     </>
