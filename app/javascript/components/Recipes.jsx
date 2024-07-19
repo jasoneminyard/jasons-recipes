@@ -58,7 +58,7 @@ const Recipes = () => {
       </section>
       <div className="py-5">
         <main className="container">
-          <Link to="/" className="btn btn-link">
+          <Link to="/" className="btn btn-link" >
             Home
           </Link>
           <div className="text-end mb-3">

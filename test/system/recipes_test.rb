@@ -13,7 +13,7 @@ class RecipesTest < ApplicationSystemTestCase
     click_on "Recipes"
 
     assert_selector "h1", text: "Recipes for every occasion"
-    assert_selector "a", text: "Home"
+    assert_selector "a", text: HOME_BUTTON
     assert_selector "a", text: "Create New Recipe"
     assert_selector "a", text: "View Recipe"
   end
@@ -22,7 +22,7 @@ class RecipesTest < ApplicationSystemTestCase
     visit "/recipes"
     assert_selector "h1", text: "Recipes for every occasion"
 
-    click_on "Home"
+    click_on HOME_BUTTON
     assert_selector "a", text: "Recipes"
 
     click_on "Recipes"
@@ -52,5 +52,20 @@ class RecipesTest < ApplicationSystemTestCase
       click_on "Create Recipe"
       assert_selector "h1", text: "Pink Lemonade"
     end
+  end
+
+  test "should edit recipe" do
+    recipe = Recipe.first
+    visit "/recipes/#{recipe.id}"
+
+    assert_selector "h1", text: recipe.name
+
+    click_on "Edit Recipe"
+
+    fill_in "Recipe Name", with: "Pink Lemonade"
+
+    click_on "Update Recipe"
+
+    assert_selector "h1", text: "Pink Lemonade"
   end
 end

@@ -93,7 +93,7 @@ const EditRecipe = () => {
           </h1>
           <form onSubmit={onSubmit}>
             <div className="form-group">
-              <label htmlFor="recipeName">Recipe name</label>
+              <label htmlFor="recipeName">Recipe Name</label>
               <input
                 type="text"
                 name="name"
