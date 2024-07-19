@@ -57,7 +57,7 @@ const NewRecipe = () => {
           <h1 className="font-weight-normal mb-5">
             Add a new recipe to our awesome recipe collection.
           </h1>
-          <form onSubmit={onSubmit}>
+          <form id="recipeForm" onSubmit={onSubmit}>
             <div className="form-group">
               <label htmlFor="recipeName">Recipe Name</label>
               <input
@@ -92,7 +92,7 @@ const NewRecipe = () => {
               required
               onChange={(event) => onChange(event, setInstruction)}
             />
-            <button type="submit" className="btn custom-button mt-3">
+            <button id="submit" type="submit" className="btn custom-button mt-3">
               Create Recipe
             </button>
             <Link to="/recipes" className="btn btn-link mt-3">
