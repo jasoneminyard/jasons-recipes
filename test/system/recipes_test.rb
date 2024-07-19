@@ -41,4 +41,15 @@ class RecipesTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Recipes for every occasion"
   end
   
+  test "should create new recipe" do
+    visit "/recipe"
+    fill_in "Recipe Name", with: "Pink Lemonade"
+    fill_in "Ingredients", with: "Pink Sugar, Lemons"
+    fill_in "Instructions", with: "Mix them all together"
+    # assert_difference("Recipe.count") do
+    #   click_on "Create Recipe"
+    # end
+    click_on "Create Recipe"
+    assert_selector "h1", text: "Pink Lemonade"
+  end
 end

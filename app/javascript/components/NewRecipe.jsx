@@ -59,7 +59,7 @@ const NewRecipe = () => {
           </h1>
           <form onSubmit={onSubmit}>
             <div className="form-group">
-              <label htmlFor="recipeName">Recipe name</label>
+              <label htmlFor="recipeName">Recipe Name</label>
               <input
                 type="text"
                 name="name"
@@ -83,7 +83,7 @@ const NewRecipe = () => {
                 Separate each ingredient with a comma.
               </small>
             </div>
-            <label htmlFor="instruction">Preparation Instructions</label>
+            <label htmlFor="instruction">Instructions</label>
             <textarea
               className="form-control"
               id="instruction"
