@@ -29,7 +29,7 @@ const Recipes = () => {
         <div className="card-body">
           <h5 className="card-title">{recipe.name}</h5>
           <Link to={`/recipes/${recipe.id}`} className="btn custom-button">
-            View Recipe
+            {window.VIEW_RECIPE_BUTTON_TEXT}
           </Link>
         </div>
       </div>
@@ -48,7 +48,7 @@ const Recipes = () => {
     <>
       <section className="jumbotron jumbotron-fluid text-center">
         <div className="container py-5">
-          <h1 className="display-4">Recipes for every occasion</h1>
+          <h1 className="display-4">{window.RECIPES_INDEX_HEADER_TEXT}</h1>
           <p className="lead text-muted">
             We’ve pulled together our most popular recipes, our latest
             additions, and our editor’s picks, so there’s sure to be something
@@ -58,20 +58,17 @@ const Recipes = () => {
       </section>
       <div className="py-5">
         <main className="container">
-          <Link to="/" className="btn btn-link">
-            Home
+          <Link to="/" className="btn btn-link" >
+            {window.HOME_BUTTON_TEXT}
           </Link>
           <div className="text-end mb-3">
             <Link to="/recipe" className="btn custom-button">
-              Create New Recipe
+              {window.CREATE_NEW_RECIPE_BUTTON_TEXT}
             </Link>
           </div>
           <div className="row">
             {recipes.length > 0 ? allRecipes : noRecipe}
           </div>
-          <Link to="/" className="btn btn-link">
-          Home
-          </Link>
         </main>
       </div>
     </>

@@ -93,7 +93,7 @@ const EditRecipe = () => {
           </h1>
           <form onSubmit={onSubmit}>
             <div className="form-group">
-              <label htmlFor="recipeName">Recipe name</label>
+              <label htmlFor="recipeName">{window.RECIPE_FORM_NAME_FIELD}</label>
               <input
                 type="text"
                 name="name"
@@ -105,7 +105,7 @@ const EditRecipe = () => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="recipeIngredients">Ingredients</label>
+              <label htmlFor="recipeIngredients">{window.RECIPE_FORM_INGREDIENTS_FIELD}</label>
               <input
                 type="text"
                 name="ingredients"
@@ -119,7 +119,7 @@ const EditRecipe = () => {
                 Separate each ingredient with a comma.
               </small>
             </div>
-            <label htmlFor="instruction">Preparation Instructions</label>
+            <label htmlFor="instruction">{window.RECIPE_FORM_INSTRUCTIONS_FIELD}</label>
             <textarea
               className="form-control"
               id="instruction"
@@ -130,10 +130,10 @@ const EditRecipe = () => {
               onChange={handleInputChange}
             />
             <button type="submit" className="btn custom-button mt-3">
-              Update Recipe
+              {window.UPDATE_RECIPE_BUTTON_TEXT}
             </button>
             <Link to="/recipes" className="btn btn-link mt-3">
-              Back to recipes
+              {window.BACK_TO_RECIPES_BUTTON_TEXT}
             </Link>
           </form>
         </div>

@@ -57,9 +57,9 @@ const NewRecipe = () => {
           <h1 className="font-weight-normal mb-5">
             Add a new recipe to our awesome recipe collection.
           </h1>
-          <form onSubmit={onSubmit}>
+          <form id="recipeForm" onSubmit={onSubmit}>
             <div className="form-group">
-              <label htmlFor="recipeName">Recipe name</label>
+              <label htmlFor="recipeName">{window.RECIPE_FORM_NAME_FIELD}</label>
               <input
                 type="text"
                 name="name"
@@ -70,7 +70,7 @@ const NewRecipe = () => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="recipeIngredients">Ingredients</label>
+              <label htmlFor="recipeIngredients">{window.RECIPE_FORM_INGREDIENTS_FIELD}</label>
               <input
                 type="text"
                 name="ingredients"
@@ -83,7 +83,7 @@ const NewRecipe = () => {
                 Separate each ingredient with a comma.
               </small>
             </div>
-            <label htmlFor="instruction">Preparation Instructions</label>
+            <label htmlFor="instruction">{window.RECIPE_FORM_INSTRUCTIONS_FIELD}</label>
             <textarea
               className="form-control"
               id="instruction"
@@ -92,11 +92,11 @@ const NewRecipe = () => {
               required
               onChange={(event) => onChange(event, setInstruction)}
             />
-            <button type="submit" className="btn custom-button mt-3">
-              Create Recipe
+            <button id="submit" type="submit" className="btn custom-button mt-3">
+              {window.CREATE_RECIPE_BUTTON_TEXT}
             </button>
             <Link to="/recipes" className="btn btn-link mt-3">
-              Back to recipes
+              {window.BACK_TO_RECIPES_BUTTON_TEXT}
             </Link>
           </form>
         </div>

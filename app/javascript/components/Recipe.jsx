@@ -93,8 +93,8 @@ const Recipe = () => {
           </div>
           <div className="col-sm-12 col-lg-2">
           <div className="text-end mb-3">
-            <Link to={`/recipes/${recipe.id}/edit`} className="btn custom-button" params={{recipe: recipe}}>
-              Edit Recipe
+            <Link to={`/recipes/${recipe.id}/edit`} className="btn custom-button">
+              {window.EDIT_RECIPE_BUTTON_TEXT}
             </Link>
           </div>
             <button
@@ -102,12 +102,12 @@ const Recipe = () => {
               className="btn btn-danger"
               onClick={deleteRecipe}
             >
-              Delete Recipe
+              {window.DELETE_RECIPE_BUTTON_TEXT}
             </button>
           </div>
         </div>
         <Link to="/recipes" className="btn btn-link">
-          Back to recipes
+          {window.BACK_TO_RECIPES_BUTTON_TEXT}
         </Link>
       </div>
     </div>
