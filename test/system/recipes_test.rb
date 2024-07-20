@@ -69,5 +69,15 @@ class RecipesTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Pink Lemonade"
   end
 
-  # destroy
+  test "should destroy a recipe" do
+    recipe = Recipe.first
+    visit "/recipes/#{recipe.id}"
+
+    assert_selector "h1", text: recipe.name
+
+    assert_difference("Recipe.count", -1) do
+      click_on DELETE_RECIPE_BUTTON_TEXT
+      assert_selector "h1", text: RECIPES_INDEX_HEADER_TEXT
+    end
+  end
 end
