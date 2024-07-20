@@ -20,7 +20,7 @@ class RecipesTest < ApplicationSystemTestCase
 
   test "should visit each link and back from Recipes Index Page" do
     visit "/recipes"
-    assert_selector "h1", text: "Recipes for every occasion"
+    assert_selector "h1", text: RECIPES_INDEX_HEADER_TEXT
 
     click_on HOME_BUTTON_TEXT
     assert_selector "a", text: VIEW_RECIPES_BUTTON_TEXT
@@ -29,27 +29,27 @@ class RecipesTest < ApplicationSystemTestCase
     assert_selector "a", text: CREATE_NEW_RECIPE_BUTTON_TEXT
 
     click_on CREATE_NEW_RECIPE_BUTTON_TEXT
-    assert_selector "a", text: "Back To Recipes"
+    assert_selector "a", text: BACK_TO_RECIPES_BUTTON_TEXT
 
-    click_on "Back To Recipes"
+    click_on BACK_TO_RECIPES_BUTTON_TEXT
     assert_selector "a", text: VIEW_RECIPE_BUTTON_TEXT
 
     click_on VIEW_RECIPE_BUTTON_TEXT
-    assert_selector "a", text: "Back To Recipes"
+    assert_selector "a", text: BACK_TO_RECIPES_BUTTON_TEXT
 
-    click_on "Back To Recipes"
-    assert_selector "h1", text: "Recipes for every occasion"
+    click_on BACK_TO_RECIPES_BUTTON_TEXT
+    assert_selector "h1", text: RECIPES_INDEX_HEADER_TEXT
   end
   
   test "should_create_new_recipe" do
     visit "/recipe"
 
-    fill_in "Recipe Name", with: "Pink Lemonade"
-    fill_in "Ingredients", with: "Pink Sugar, Lemons"
-    fill_in "Instructions", with: "Mix them all together"
+    fill_in RECIPE_FORM_NAME_FIELD, with: "Pink Lemonade"
+    fill_in RECIPE_FORM_INGREDIENTS_FIELD, with: "Pink Sugar, Lemons"
+    fill_in RECIPE_FORM_INSTRUCTIONS_FIELD, with: "Mix them all together"
 
     assert_difference("Recipe.count") do
-      click_on "Create Recipe"
+      click_on CREATE_RECIPE_BUTTON_TEXT
       assert_selector "h1", text: "Pink Lemonade"
     end
   end
@@ -60,12 +60,14 @@ class RecipesTest < ApplicationSystemTestCase
 
     assert_selector "h1", text: recipe.name
 
-    click_on "Edit Recipe"
+    click_on EDIT_RECIPE_BUTTON_TEXT
 
-    fill_in "Recipe Name", with: "Pink Lemonade"
+    fill_in RECIPE_FORM_NAME_FIELD, with: "Pink Lemonade"
 
-    click_on "Update Recipe"
+    click_on UPDATE_RECIPE_BUTTON_TEXT
 
     assert_selector "h1", text: "Pink Lemonade"
   end
+
+  # destroy
 end
