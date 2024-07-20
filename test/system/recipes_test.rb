@@ -5,36 +5,36 @@ class RecipesTest < ApplicationSystemTestCase
   test "should visit the homepage" do
     visit "/"
   
-    assert_selector "h1", text: "Food Recipes"
+    assert_selector "h1", text: HOME_HEADER_TEXT
   end
 
   test "should visit index when Recipes button is clicked" do
     visit "/"
-    click_on "Recipes"
+    click_on VIEW_RECIPES_BUTTON_TEXT
 
-    assert_selector "h1", text: "Recipes for every occasion"
-    assert_selector "a", text: HOME_BUTTON
-    assert_selector "a", text: "Create New Recipe"
-    assert_selector "a", text: "View Recipe"
+    assert_selector "h1", text: RECIPES_INDEX_HEADER_TEXT
+    assert_selector "a", text: HOME_BUTTON_TEXT
+    assert_selector "a", text: CREATE_NEW_RECIPE_BUTTON_TEXT
+    assert_selector "a", text: VIEW_RECIPE_BUTTON_TEXT
   end
 
   test "should visit each link and back from Recipes Index Page" do
     visit "/recipes"
     assert_selector "h1", text: "Recipes for every occasion"
 
-    click_on HOME_BUTTON
-    assert_selector "a", text: "Recipes"
+    click_on HOME_BUTTON_TEXT
+    assert_selector "a", text: VIEW_RECIPES_BUTTON_TEXT
 
-    click_on "Recipes"
-    assert_selector "a", text: "Create New Recipe"
+    click_on VIEW_RECIPES_BUTTON_TEXT
+    assert_selector "a", text: CREATE_NEW_RECIPE_BUTTON_TEXT
 
-    click_on "Create New Recipe"
+    click_on CREATE_NEW_RECIPE_BUTTON_TEXT
     assert_selector "a", text: "Back To Recipes"
 
     click_on "Back To Recipes"
-    assert_selector "a", text: "View Recipe"
+    assert_selector "a", text: VIEW_RECIPE_BUTTON_TEXT
 
-    click_on "View Recipe"
+    click_on VIEW_RECIPE_BUTTON_TEXT
     assert_selector "a", text: "Back To Recipes"
 
     click_on "Back To Recipes"

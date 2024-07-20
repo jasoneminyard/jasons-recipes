@@ -1,1 +1,9 @@
-HOME_BUTTON = "Home"
+BACK_TO_RECIPES_BUTTON_TEXT = "Back To Recipes"
+CREATE_NEW_RECIPE_BUTTON_TEXT = "Create New Recipe"
+HOME_BUTTON_TEXT = "Home"
+HOME_HEADER_TEXT = "Food Recipes"
+RECIPES_INDEX_HEADER_TEXT = "Recipes for every occasion!"
+VIEW_RECIPE_BUTTON_TEXT = "View Recipe"
+VIEW_RECIPES_BUTTON_TEXT = "View Recipes"
+
+
