@@ -35,9 +35,9 @@ class Api::V1::RecipesController < ApplicationController
   def update
     recipe = @recipe.update(recipe_params)
     if recipe
-      render json: recipe
+      render json: @recipe
     else
-      render json: recipe.errors
+      render json: @recipe.errors
     end
   end
 
