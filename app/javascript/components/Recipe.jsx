@@ -91,12 +91,10 @@ const Recipe = () => {
               }}
             />
           </div>
-          <div className="col-sm-12 col-lg-2">
-          <div className="text-end mb-3">
-            <Link to={`/recipes/${recipe.id}/edit`} className="btn custom-button">
+          <div className="col-sm-12 col-lg-2 d-flex flex-column align-items-end mb-3">
+            <Link to={`/recipes/${recipe.id}/edit`} className="btn custom-button mb-2">
               {window.EDIT_RECIPE_BUTTON_TEXT}
             </Link>
-          </div>
             <button
               type="button"
               className="btn btn-danger"
@@ -105,6 +103,7 @@ const Recipe = () => {
               {window.DELETE_RECIPE_BUTTON_TEXT}
             </button>
           </div>
+
         </div>
         <Link to="/recipes" className="btn btn-link">
           {window.BACK_TO_RECIPES_BUTTON_TEXT}
