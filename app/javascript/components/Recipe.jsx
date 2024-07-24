@@ -66,7 +66,7 @@ const Recipe = () => {
         <div className="">
           <div className="hero position-relative d-flex align-items-center justify-content-center">
             <img
-              src={recipe.image}
+              src={recipe.image || window.NO_PHOTO_PLACEHOLDER_ADDRESS}
               alt={`${recipe.name}`}
               className="img-fluid position-absolute"
             />
