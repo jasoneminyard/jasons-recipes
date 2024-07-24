@@ -6,12 +6,21 @@ class Api::V1::RecipesController < ApplicationController
     render json: recipe
   end
 
+  # def create
+  #   recipe = Recipe.create!(recipe_params)
+  #   if recipe
+  #     render json: recipe
+  #   else
+  #     render json: recipe.errors
+  #   end
+  # end
+
   def create
-    recipe = Recipe.create!(recipe_params)
-    if recipe
-      render json: recipe
+    @recipe = Recipe.new(recipe_params)
+    if @recipe.save
+      render json: @recipe, status: :created
     else
-      render json: recipe.errors
+      render json: @recipe.errors, status: :unprocessable_entity
     end
   end
 
@@ -23,6 +32,7 @@ class Api::V1::RecipesController < ApplicationController
     end
   end
 
+
   def show
     render json: @recipe
   end
@@ -32,12 +42,20 @@ class Api::V1::RecipesController < ApplicationController
     render json: { message: 'Recipe deleted!' }
   end
 
+  # def update
+  #   recipe = @recipe.update(recipe_params)
+  #   if recipe
+  #     render json: @recipe
+  #   else
+  #     render json: @recipe.errors
+  #   end
+  # end
+
   def update
-    recipe = @recipe.update(recipe_params)
-    if recipe
+    if @recipe.update(recipe_params)
       render json: @recipe
     else
-      render json: @recipe.errors
+      render json: @recipe.errors, status: :unprocessable_entity
     end
   end
 
