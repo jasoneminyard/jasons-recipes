@@ -1,19 +1,38 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :recipes, only: [:index, :create, :show, :destroy, :update, :edit]
+      resources :recipes
     end
   end
-  
-  root 'homepage#index'
-  get '/*path' => 'homepage#index' # any unmatched routes will take you to the index
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # # Mount ActiveStorage routes
+  # mount ActiveStorage::Engine => '/rails/active_storage'
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  # get "up" => "rails/health#show", as: :rails_health_check
+  # # Include ActiveStorage routes explicitly
+  # direct :rails_blob do |model|
+  #   ActiveStorage::Blob.routes(model)
+  # end
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  # direct :rails_blob do |blob|
+  #   route_for(:rails_blob, blob)
+  # end
+  # direct :rails_blob_proxy do |blob|
+  #   route_for(:rails_blob_proxy, blob)
+  # end
+  # direct :rails_disk_service do |disk|
+  #   route_for(:rails_disk_service, disk)
+  # end
+
+  # direct :rails_blob_proxy_service do |proxy|
+  #   route_for(:rails_blob_proxy_service, proxy)
+  # end
+
+  # # Define ActiveStorage routes here if not already included
+  # get '/rails/active_storage/blobs/redirect/*path', to: 'active_storage/blobs#redirect'
+  # get '/rails/active_storage/blobs/proxy/*path', to: 'active_storage/blobs#proxy'
+
+  # Catch-all route (ensure it's at the bottom)
+  get '*path', to: 'homepage#index', constraints: lambda { |req|
+    req.format.html? && !req.path.start_with?('/rails/active_storage')
+  }
 end

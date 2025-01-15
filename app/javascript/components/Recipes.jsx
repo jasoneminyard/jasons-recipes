@@ -22,9 +22,9 @@ const Recipes = () => {
     <div key={index} className="col-md-6 col-lg-4">
       <div className="card mb-4">
         <img
-          src={recipe.image || window.NO_PHOTO_PLACEHOLDER_ADDRESS}
+          src={recipe.image || ''}
           className="card-img-top"
-          alt={`${recipe.name} image`}
+          alt={`${recipe.name}`}
         />
         <div className="card-body">
           <h5 className="card-title">{recipe.name}</h5>

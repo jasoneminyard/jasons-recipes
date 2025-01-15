@@ -131,6 +131,18 @@ const RecipeForm = () => {
               value={recipe.instruction}
               onChange={handleInputChange}
             />
+            {recipe.image_url && (
+              <div className="form-group">
+                <label>{window.CURRENT_IMAGE_LABEL}</label>
+                <img
+                  src={recipe.image_url}
+                  alt="Current Recipe"
+                  className="img-thumbnail mb-3"
+                  style={{ maxHeight: "200px" }}
+                />
+              </div>
+            )}
+
             <div className="form-group">
               <label htmlFor="recipeImage">{window.RECIPE_FORM_IMAGE_FIELD}</label>
               <input
