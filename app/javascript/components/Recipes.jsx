@@ -22,7 +22,7 @@ const Recipes = () => {
     <div key={index} className="col-md-6 col-lg-4">
       <div className="card mb-4">
         <img
-          src={recipe.image_url || "Sammy_Meal.jpg"}
+          src={recipe.image_url || window.NO_PHOTO_PLACEHOLDER_ADDRESS}
           className="card-img-top"
           alt={`${recipe.name}`}
         />

@@ -19,10 +19,7 @@ class Api::V1::RecipesController < ApplicationController
       render json: { error: e.message }, status: :internal_server_error
     end
   end
-  
-  
-  
-  
+   
   def create
     recipe = Recipe.new(recipe_params)
     if recipe.save
@@ -41,12 +38,16 @@ class Api::V1::RecipesController < ApplicationController
     end
   end  
 
-
   def show
-    # render json: @recipe
-    render json: @recipe.as_json.merge(image_url: @recipe.image.attached? ? url_for(@recipe.image) : nil)
+    image_url = if @recipe.image.attached?
+                  url_for(@recipe.image)
+                else
+                  # Provide a default placeholder image URL
+                  ActionController::Base.helpers.asset_path('Sammy_Meal.jpg')
+                end
+    render json: @recipe.as_json.merge(image_url: image_url)
   end
-
+  
   def destroy
     @recipe&.destroy
     render json: { message: 'Recipe deleted!' }
