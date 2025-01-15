@@ -1,23 +1,28 @@
 class Api::V1::RecipesController < ApplicationController
   before_action :set_recipe, only: %i[show destroy update edit]
   
+  # app/assets/images/Sammy_Meal.jpg
   def index
-    recipes = Recipe.all.order(created_at: :desc).map do |recipe|
-      recipe.as_json.merge(image_url: recipe.image.attached? ? url_for(recipe.image) : nil)
+    begin
+      recipes = Recipe.all.order(created_at: :desc).map do |recipe|
+        image_url = if recipe.image.attached?
+                      url_for(recipe.image)
+                    else
+                      # Use only the filename here, not the full path
+                      ActionController::Base.helpers.asset_path("Sammy_Meal.jpg")
+                    end
+        recipe.as_json.merge(image_url: image_url)
+      end
+      render json: recipes
+    rescue => e
+      logger.error "Error in fetching recipes: #{e.message}"
+      render json: { error: e.message }, status: :internal_server_error
     end
-    render json: recipes
   end
   
-
-  # def create
-  #   recipe = Recipe.create!(recipe_params)
-  #   if recipe
-  #     render json: recipe
-  #   else
-  #     render json: recipe.errors
-  #   end
-  # end
-
+  
+  
+  
   def create
     recipe = Recipe.new(recipe_params)
     if recipe.save
@@ -46,15 +51,6 @@ class Api::V1::RecipesController < ApplicationController
     @recipe&.destroy
     render json: { message: 'Recipe deleted!' }
   end
-
-  # def update
-  #   recipe = @recipe.update(recipe_params)
-  #   if recipe
-  #     render json: @recipe
-  #   else
-  #     render json: @recipe.errors
-  #   end
-  # end
 
   def update
     if @recipe.update(recipe_params)
