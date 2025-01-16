@@ -5,6 +5,7 @@ const RecipeForm = () => {
   const params = useParams();
   const navigate = useNavigate();
   const [recipe, setRecipe] = useState({ name: "", ingredients: "", instruction: "" });
+  const [image, setImage] = useState(null);
 
   useEffect(() => {
     if (params.id) {
@@ -40,6 +41,10 @@ const RecipeForm = () => {
     updateRecipe(name, value);
   };
 
+  const handleFileChange = (e) => {
+    setImage(e.target.files[0]);
+  };
+
   const onSubmit = (event) => {
     event.preventDefault();
     const id = params.id;
@@ -53,11 +58,13 @@ const RecipeForm = () => {
       return;
     }
 
-    const body = {
-      name,
-      ingredients,
-      instruction: stripHtmlEntities(instruction),
-    };
+    const formData = new FormData();
+    formData.append("recipe[name]", name);
+    formData.append("recipe[ingredients]", ingredients);
+    formData.append("recipe[instruction]", stripHtmlEntities(instruction));
+    if (image) {
+      formData.append("recipe[image]", image);
+    }
 
     const method = id ? "PUT" : "POST";
     const token = document.querySelector('meta[name="csrf-token"]').content;
@@ -66,9 +73,8 @@ const RecipeForm = () => {
       method: method,
       headers: {
         "X-CSRF-Token": token,
-        "Content-Type": "application/json",
       },
-      body: JSON.stringify(body),
+      body: formData,
     })
       .then((response) => {
         if (response.ok) {
@@ -125,6 +131,28 @@ const RecipeForm = () => {
               value={recipe.instruction}
               onChange={handleInputChange}
             />
+            {recipe.image_url && (
+              <div className="form-group">
+                <label>{window.CURRENT_IMAGE_LABEL}</label>
+                <img
+                  src={recipe.image_url}
+                  alt="Current Recipe"
+                  className="img-thumbnail mb-3"
+                  style={{ maxHeight: "200px" }}
+                />
+              </div>
+            )}
+
+            <div className="form-group">
+              <label htmlFor="recipeImage">{window.RECIPE_FORM_IMAGE_FIELD}</label>
+              <input
+                type="file"
+                name="image"
+                id="recipeImage"
+                className="form-control"
+                onChange={handleFileChange}
+              />
+            </div>
             <button type="submit" className="btn custom-button mt-3">
               {params.id ? window.UPDATE_RECIPE_BUTTON_TEXT : window.CREATE_RECIPE_BUTTON_TEXT}
             </button>

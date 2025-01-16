@@ -16,15 +16,15 @@ const Recipes = () => {
       })
       .then((res) => setRecipes(res))
       .catch(() => navigate("/"));
-  }, []);
+  }, [navigate]);
 
   const allRecipes = recipes.map((recipe, index) => (
     <div key={index} className="col-md-6 col-lg-4">
       <div className="card mb-4">
         <img
-          src={recipe.image}
+          src={recipe.image_url || window.NO_PHOTO_PLACEHOLDER_ADDRESS}
           className="card-img-top"
-          alt={`${recipe.name} image`}
+          alt={`${recipe.name}`}
         />
         <div className="card-body">
           <h5 className="card-title">{recipe.name}</h5>
@@ -58,7 +58,7 @@ const Recipes = () => {
       </section>
       <div className="py-5">
         <main className="container">
-          <Link to="/" className="btn btn-link" >
+          <Link to="/" className="btn btn-link">
             {window.HOME_BUTTON_TEXT}
           </Link>
           <div className="text-end mb-3">
@@ -73,7 +73,6 @@ const Recipes = () => {
       </div>
     </>
   );
-
 };
 
 export default Recipes;
