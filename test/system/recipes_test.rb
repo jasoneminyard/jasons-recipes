@@ -16,6 +16,7 @@ class RecipesTest < ApplicationSystemTestCase
     assert_selector "a", text: HOME_BUTTON_TEXT
     assert_selector "a", text: CREATE_NEW_RECIPE_BUTTON_TEXT
     assert_selector "a", text: VIEW_RECIPE_BUTTON_TEXT
+    assert_selector "img[src*='/assets/']", visible: true
   end
 
   test "should visit each link and back from Recipes Index Page" do
